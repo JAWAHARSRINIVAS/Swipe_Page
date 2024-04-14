@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import { DesignProvider } from './contexts/authDesign'
 
-function App() {
+const RouteHome = React.lazy(() => import('./pages/Home'))
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Routes>
+        <Route path='/' element={
+          <React.Suspense fallback="Loading..." >
+             <DesignProvider>
+                <RouteHome />
+             </DesignProvider>
+          </React.Suspense>
+        } />
+      </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
